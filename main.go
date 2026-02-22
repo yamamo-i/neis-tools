@@ -17,7 +17,7 @@ func main() {
 	if err != nil {
 		// 3. エラー処理
 		errorMsg := fmt.Sprintf("Error during scraping: %v", err)
-		log.Printf(errorMsg)
+		log.Print(errorMsg)
 		// エラー用Webhookに通知
 		if sendErr := SendMessage(AppConfig.SlackWebhookURLError, errorMsg); sendErr != nil {
 			log.Printf("Failed to send error message to Slack: %v", sendErr)
