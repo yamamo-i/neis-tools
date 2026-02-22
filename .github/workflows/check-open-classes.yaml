@@ -1,8 +1,8 @@
 name: Check Open Classes
 
 on:
-#   schedule:
-#     - cron: '*/10 * * * *'
+  schedule:
+    - cron: '*/10 * * * *'
   workflow_dispatch: # Allows manual triggering
 
 jobs:
