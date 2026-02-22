@@ -1,0 +1,26 @@
+name: Check Open Classes
+
+on:
+#   schedule:
+#     - cron: '*/10 * * * *'
+  workflow_dispatch: # Allows manual triggering
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Download binary from release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh release download --repo ${{ github.repository }} -p 'neis-tools' --clobber
+
+      - name: Make binary executable
+        run: chmod +x neis-tools
+
+      - name: Run scraper
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: ./neis-tools
